@@ -14,7 +14,7 @@
       class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg lg:w-80 md:w-64 sm:w-40 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
       placeholder="Search for items">
   </div>
-  <button type="button"
+  <button (click)="openModalAdd()" type="button"
     class="ml-auto text-white bg-[#1da1f2] hover:bg-[#1da1f2]/90 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg text-sm px-2 py-1 md:px-5 md:py-2.5 text-center inline-flex items-center">
     <svg fill="currentColor" viewBox="0 0 24 24" stroke-width=".5" stroke="currentColor" class="w-5 h-5 hidden md:block" xmlns="http://www.w3.org/2000/svg">
       <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2Z"></path>
@@ -55,8 +55,9 @@
           <td class="px-6 py-4">Draft</td>
           <td class="px-6 py-4">Menunggu Disetujui</td>
           <td class="px-6 py-4 ">
-            <a href="#" class="w-full">
-              <button type="button"
+            <a class="w-full">
+              <!-- button edit -->
+              <button (click)="openModalUpdate()" type="button"
                 class="w-full focus:outline-none text-white bg-yellow-300 hover:bg-yellow-400 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
                 <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mx-auto"
                   stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
@@ -68,8 +69,8 @@
               </button>
             </a>
             <br>
-            <a href="#" class="w-full">
-              <button type="button"
+            <a class="w-full">
+              <button (click)="openModalApprove()" type="button"
                 class="w-full focus:outline-none text-white bg-teal-500 hover:bg-teal-600 focus:ring-4 focus:ring-teal-300  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
                 <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mx-auto"
                   stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
@@ -81,8 +82,8 @@
               </button>
             </a>
             <br>
-            <a href="#" class="w-full">
-              <button type="button"
+            <a class="w-full">
+              <button (click)="onDeleteFormITCM()" type="button"
                 class="w-full focus:outline-none text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
                 <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mx-auto"
                   stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24"
@@ -365,5 +366,437 @@
         </tr>
       </tbody>
     </table>
+  </div>
+</div>
+
+<!-- ADD MODAL -->
+<div *ngIf="isModalAddOpen" tabindex="-1" aria-hidden="true"
+  class="fixed top-0 left-0 right-0 bottom-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
+  <div class="relative w-full max-w-xl md:max-w-2xl bg-white rounded-lg shadow dark:bg-gray-700 max-h-[90vh] overflow-y-auto mx-4 md:mx-0">
+    <!-- Modal header -->
+    <div class="sticky top-0 flex bg-white items-center justify-between p-4 border-b rounded-t dark:border-gray-600">
+      <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">
+        Tambah
+      </h3>
+      <button (click)="closeModalAdd()"
+        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
+        <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+        </svg>
+        <span class="sr-only">Close modal</span>
+      </button>
+    </div>
+    <!-- Modal body -->
+    <form action="" class="p-6">
+      <h3 class="text-2xl text-gray-900 font-semibold">Formulir ITCM!</h3>
+      <p class="text-gray-600">Masukkan informasi form ITCM yg ingin anda tambahkan</p>
+
+      <div class="mt-4">
+        <label for="ticketNo" class="text-sm md:text-base">Nomor Tiket</label>
+        <input type="text" name="ticketNo" id="ticketNo" placeholder="" class="border rounded-xl p-2 w-full  ">
+      </div>
+
+      <div class="mt-4">
+        <label for="projectSelect" class="text-sm md:text-base">Pilih Projek</label>
+        <select id="projectSelect"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a project</option>
+          <option value="Project1">Project 1</option>
+          <option value="Project2">Project 2</option>
+          <option value="Project3">Project 3</option>
+        </select>
+      </div>
+
+      <div class="mt-4">
+        <label for="daNo" class="text-sm md:text-base">Nomor DA</label>
+        <input type="text" name="daNo" id="daNo" placeholder="" class="border rounded-xl p-2 w-full  ">
+      </div>
+
+      <div class="mt-4">
+        <label for="applicantName" class="text-sm md:text-base">Nama Pemohon</label>
+        <input type="text" name="applicantName" id="applicantName" placeholder=""
+          class="border rounded-xl p-2 w-full  ">
+      </div>
+
+      <div class="mt-4">
+        <label for="agency" class="text-sm md:text-base">Instansi</label>
+        <input type="text" name="agency" id="agency" placeholder="" class="border rounded-xl p-2 w-full  ">
+      </div>
+
+      <div class="mt-4">
+        <label for="date" class="text-sm md:text-base">Tanggal</label>
+        <input type="date" name="date" id="date" placeholder="Pilih Tanggal" class="border rounded-xl p-2 w-full  ">
+      </div>
+
+      <div class="mt-4">
+        <label for="assetChange" class="text-sm md:text-base">Perubahan Aset</label>
+        <input type="text" name="assetChange" id="assetChange" placeholder="" class="border rounded-xl p-2 w-full  ">
+      </div>
+
+      <div class="mt-4">
+        <label for="description" class="text-sm md:text-base">Deskripsi</label>
+        <textarea name="description" id="description" cols="30" rows="3" placeholder=""
+          class="border rounded-xl p-2 w-full  "></textarea>
+      </div>
+
+      <h3 class="text-2xl text-gray-900 font-semibold mt-6">Penerima!</h3>
+      <p class="text-gray-600">Masukkan informasi Penerima yg ingin anda tuju</p>
+
+      <div class="mt-4">
+        <label for="recipientSelect1" class="text-sm md:text-base">Woilah</label>
+        <select id="recipientSelect1"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a recipient</option>
+          <option value="Recipient1">Recipient 1</option>
+          <option value="Recipient2">Recipient 2</option>
+        </select>
+        <input type="text" name="recipientInfo1" id="recipientInfo1" placeholder=""
+          class="border rounded-xl p-2 w-full  ">
+      </div>
+
+      <div class="mt-4">
+        <label for="recipientSelect2" class="text-sm md:text-base">Woilah</label>
+        <select id="recipientSelect2"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a recipient</option>
+          <option value="Recipient1">Recipient 1</option>
+          <option value="Recipient2">Recipient 2</option>
+        </select>
+        <input type="text" name="recipientInfo2" id="recipientInfo2" placeholder=""
+          class="border rounded-xl p-2 w-full  ">
+      </div>
+
+      <div class="mt-4">
+        <label for="recipientSelect3" class="text-sm md:text-base">Woilah</label>
+        <select id="recipientSelect3"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a recipient</option>
+          <option value="Recipient1">Recipient 1</option>
+          <option value="Recipient2">Recipient 2</option>
+        </select>
+        <input type="text" name="recipientInfo3" id="recipientInfo3" placeholder=""
+          class="border rounded-xl p-2 w-full  ">
+      </div>
+
+      <div class="mt-4">
+        <label for="recipientSelect4" class="text-sm md:text-base">Woilah</label>
+        <select id="recipientSelect4"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a recipient</option>
+          <option value="Recipient1">Recipient 1</option>
+          <option value="Recipient2">Recipient 2</option>
+        </select>
+        <input type="text" name="recipientInfo4" id="recipientInfo4" placeholder=""
+          class="border rounded-xl p-2 w-full  ">
+      </div>
+
+      <div class="mt-4">
+        <label for="recipientSelect5" class="text-sm md:text-base">Woilah</label>
+        <select id="recipientSelect5"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a recipient</option>
+          <option value="Recipient1">Recipient 1</option>
+          <option value="Recipient2">Recipient 2</option>
+        </select>
+        <input type="text" name="recipientInfo5" id="recipientInfo5" placeholder=""
+          class="border rounded-xl p-2 w-full  ">
+      </div>
+    </form>
+
+    <!-- Modal footer -->
+    <div class="flex items-center p-4 border-t border-gray-200 rounded-b dark:border-gray-600">
+      <!-- <button (click)="submitForm()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button> -->
+      <button (click)="closeModalAdd()" type="button"
+        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Update MODAL -->
+<div *ngIf="isModalUpdateOpen" tabindex="-1" aria-hidden="true"
+  class="fixed top-0 left-0 right-0 bottom-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
+  <div class="relative w-full max-w-xl md:max-w-2xl bg-white rounded-lg shadow dark:bg-gray-700 max-h-[90vh] overflow-y-auto mx-4 md:mx-0">
+    <!-- Modal header -->
+    <div class="sticky top-0 flex bg-white items-center justify-between p-4 border-b rounded-t dark:border-gray-600">
+      <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">
+        Edit
+      </h3>
+      <button (click)="closeModalUpdate()"
+        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
+        <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+        </svg>
+        <span class="sr-only">Close modal</span>
+      </button>
+    </div>
+    <!-- Modal body -->
+    <form action="" class="p-6">
+      <h3 class="text-2xl text-gray-900 font-semibold">Formulir ITCM!</h3>
+      <p class="text-gray-600">Silakan masukkan informasi tambahan untuk form ITCM yang ingin Anda perbarui</p>
+
+      <div class="mt-4">
+        <label for="ticketNo" class="text-sm md:text-base">Nomor Tiket</label>
+        <input type="text" name="ticketNo" id="ticketNo" placeholder="" class="border rounded-xl p-2 w-full  ">
+      </div>
+
+      <div class="mt-4">
+        <label for="projectSelect" class="text-sm md:text-base">Pilih Projek</label>
+        <select id="projectSelect"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a project</option>
+          <option value="Project1">Project 1</option>
+          <option value="Project2">Project 2</option>
+          <option value="Project3">Project 3</option>
+        </select>
+      </div>
+
+      <div class="mt-4">
+        <label for="daNo" class="text-sm md:text-base">Nomor DA</label>
+        <input type="text" name="daNo" id="daNo" placeholder="" class="border rounded-xl p-2 w-full  ">
+      </div>
+
+      <div class="mt-4">
+        <label for="applicantName" class="text-sm md:text-base">Nama Pemohon</label>
+        <input type="text" name="applicantName" id="applicantName" placeholder=""
+          class="border rounded-xl p-2 w-full  ">
+      </div>
+
+      <div class="mt-4">
+        <label for="agency" class="text-sm md:text-base">Instansi</label>
+        <input type="text" name="agency" id="agency" placeholder="" class="border rounded-xl p-2 w-full  ">
+      </div>
+
+      <div class="mt-4">
+        <label for="date" class="text-sm md:text-base">Tanggal</label>
+        <input type="date" name="date" id="date" placeholder="Pilih Tanggal" class="border rounded-xl p-2 w-full  ">
+      </div>
+
+      <div class="mt-4">
+        <label for="assetChange" class="text-sm md:text-base">Perubahan Aset</label>
+        <input type="text" name="assetChange" id="assetChange" placeholder="" class="border rounded-xl p-2 w-full  ">
+      </div>
+
+      <div class="mt-4">
+        <label for="description" class="text-sm md:text-base">Deskripsi</label>
+        <textarea name="description" id="description" cols="30" rows="3" placeholder=""
+          class="border rounded-xl p-2 w-full  "></textarea>
+      </div>
+
+      <h3 class="text-2xl text-gray-900 font-semibold mt-6">Penerima!</h3>
+      <p class="text-gray-600">Masukkan informasi Penerima yg ingin anda tuju</p>
+
+      <div class="mt-4">
+        <label for="recipientSelect1" class="text-sm md:text-base">Woilah</label>
+        <select id="recipientSelect1"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a recipient</option>
+          <option value="Recipient1">Recipient 1</option>
+          <option value="Recipient2">Recipient 2</option>
+        </select>
+        <input type="text" name="recipientInfo1" id="recipientInfo1" placeholder=""
+          class="border rounded-xl p-2 w-full  ">
+      </div>
+
+      <div class="mt-4">
+        <label for="recipientSelect2" class="text-sm md:text-base">Woilah</label>
+        <select id="recipientSelect2"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a recipient</option>
+          <option value="Recipient1">Recipient 1</option>
+          <option value="Recipient2">Recipient 2</option>
+        </select>
+        <input type="text" name="recipientInfo2" id="recipientInfo2" placeholder=""
+          class="border rounded-xl p-2 w-full  ">
+      </div>
+
+      <div class="mt-4">
+        <label for="recipientSelect3" class="text-sm md:text-base">Woilah</label>
+        <select id="recipientSelect3"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a recipient</option>
+          <option value="Recipient1">Recipient 1</option>
+          <option value="Recipient2">Recipient 2</option>
+        </select>
+        <input type="text" name="recipientInfo3" id="recipientInfo3" placeholder=""
+          class="border rounded-xl p-2 w-full  ">
+      </div>
+
+      <div class="mt-4">
+        <label for="recipientSelect4" class="text-sm md:text-base">Woilah</label>
+        <select id="recipientSelect4"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a recipient</option>
+          <option value="Recipient1">Recipient 1</option>
+          <option value="Recipient2">Recipient 2</option>
+        </select>
+        <input type="text" name="recipientInfo4" id="recipientInfo4" placeholder=""
+          class="border rounded-xl p-2 w-full  ">
+      </div>
+
+      <div class="mt-4">
+        <label for="recipientSelect5" class="text-sm md:text-base">Woilah</label>
+        <select id="recipientSelect5"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a recipient</option>
+          <option value="Recipient1">Recipient 1</option>
+          <option value="Recipient2">Recipient 2</option>
+        </select>
+        <input type="text" name="recipientInfo5" id="recipientInfo5" placeholder=""
+          class="border rounded-xl p-2 w-full  ">
+      </div>
+    </form>
+
+    <!-- Modal footer -->
+    <div class="flex items-center p-4 border-t border-gray-200 rounded-b dark:border-gray-600">
+      <!-- <button (click)="submitForm()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button> -->
+      <button (click)="closeModalUpdate()" type="button"
+        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Approve MODAL -->
+<div *ngIf="isModalApproveOpen" tabindex="-1" aria-hidden="true"
+  class="fixed top-0 left-0 right-0 bottom-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
+  <div class="relative w-full max-w-xl md:max-w-2xl bg-white rounded-lg shadow dark:bg-gray-700 max-h-[90vh] overflow-y-auto mx-4 md:mx-0">
+    <!-- Modal header -->
+    <div class="sticky top-0 flex bg-white items-center justify-between p-4 border-b rounded-t dark:border-gray-600">
+      <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">
+        Approve
+      </h3>
+      <button (click)="closeModalApprove()"
+        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
+        <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+        </svg>
+        <span class="sr-only">Close modal</span>
+      </button>
+    </div>
+    <!-- Modal body -->
+    <form action="" class="p-6">
+      <h3 class="text-2xl text-gray-900 font-semibold">Formulir ITCM!</h3>
+      <p class="text-gray-600">Mohon lengkapi informasi yang diperlukan untuk proses persetujuan</p>
+
+      <div class="mt-4">
+        <label for="ticketNo" class="text-sm md:text-base">Nomor Tiket</label>
+        <input type="text" name="ticketNo" id="ticketNo" placeholder="" class="border rounded-xl p-2 w-full  ">
+      </div>
+
+      <div class="mt-4">
+        <label for="projectSelect" class="text-sm md:text-base">Pilih Projek</label>
+        <select id="projectSelect"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a project</option>
+          <option value="Project1">Project 1</option>
+          <option value="Project2">Project 2</option>
+          <option value="Project3">Project 3</option>
+        </select>
+      </div>
+
+      <div class="mt-4">
+        <label for="daNo" class="text-sm md:text-base">Nomor DA</label>
+        <input type="text" name="daNo" id="daNo" placeholder="" class="border rounded-xl p-2 w-full">
+      </div>
+
+      <div class="mt-4">
+        <label for="applicantName" class="text-sm md:text-base">Nama Pemohon</label>
+        <input type="text" name="applicantName" id="applicantName" placeholder=""
+          class="border rounded-xl p-2 w-full  ">
+      </div>
+
+      <div class="mt-4">
+        <label for="agency" class="text-sm md:text-base">Instansi</label>
+        <input type="text" name="agency" id="agency" placeholder="" class="border rounded-xl p-2 w-full  ">
+      </div>
+
+      <div class="mt-4">
+        <label for="date" class="text-sm md:text-base">Tanggal</label>
+        <input type="date" name="date" id="date" placeholder="Pilih Tanggal" class="border rounded-xl p-2 w-full  ">
+      </div>
+
+      <div class="mt-4">
+        <label for="assetChange" class="text-sm md:text-base">Perubahan Aset</label>
+        <input type="text" name="assetChange" id="assetChange" placeholder="" class="border rounded-xl p-2 w-full  ">
+      </div>
+
+      <div class="mt-4">
+        <label for="description" class="text-sm md:text-base">Deskripsi</label>
+        <textarea name="description" id="description" cols="30" rows="3" placeholder=""
+          class="border rounded-xl p-2 w-full  "></textarea>
+      </div>
+
+      <h3 class="text-2xl text-gray-900 font-semibold mt-6">Penerima!</h3>
+      <p class="text-gray-600">Masukkan informasi Penerima yg ingin anda tuju</p>
+
+      <div class="mt-4">
+        <label for="recipientSelect1" class="text-sm md:text-base">Woilah</label>
+        <select id="recipientSelect1"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a recipient</option>
+          <option value="Recipient1">Recipient 1</option>
+          <option value="Recipient2">Recipient 2</option>
+        </select>
+        <input type="text" name="recipientInfo1" id="recipientInfo1" placeholder=""
+          class="border rounded-xl p-2 w-full  ">
+      </div>
+
+      <div class="mt-4">
+        <label for="recipientSelect2" class="text-sm md:text-base">Woilah</label>
+        <select id="recipientSelect2"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a recipient</option>
+          <option value="Recipient1">Recipient 1</option>
+          <option value="Recipient2">Recipient 2</option>
+        </select>
+        <input type="text" name="recipientInfo2" id="recipientInfo2" placeholder=""
+          class="border rounded-xl p-2 w-full  ">
+      </div>
+
+      <div class="mt-4">
+        <label for="recipientSelect3" class="text-sm md:text-base">Woilah</label>
+        <select id="recipientSelect3"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a recipient</option>
+          <option value="Recipient1">Recipient 1</option>
+          <option value="Recipient2">Recipient 2</option>
+        </select>
+        <input type="text" name="recipientInfo3" id="recipientInfo3" placeholder=""
+          class="border rounded-xl p-2 w-full  ">
+      </div>
+
+      <div class="mt-4">
+        <label for="recipientSelect4" class="text-sm md:text-base">Woilah</label>
+        <select id="recipientSelect4"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a recipient</option>
+          <option value="Recipient1">Recipient 1</option>
+          <option value="Recipient2">Recipient 2</option>
+        </select>
+        <input type="text" name="recipientInfo4" id="recipientInfo4" placeholder=""
+          class="border rounded-xl p-2 w-full  ">
+      </div>
+
+      <div class="mt-4">
+        <label for="recipientSelect5" class="text-sm md:text-base">Woilah</label>
+        <select id="recipientSelect5"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a recipient</option>
+          <option value="Recipient1">Recipient 1</option>
+          <option value="Recipient2">Recipient 2</option>
+        </select>
+        <input type="text" name="recipientInfo5" id="recipientInfo5" placeholder=""
+          class="border rounded-xl p-2 w-full  ">
+      </div>
+    </form>
+
+    <!-- Modal footer -->
+    <div class="flex items-center p-4 border-t border-gray-200 rounded-b dark:border-gray-600">
+      <!-- <button (click)="submitForm()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button> -->
+      <button (click)="closeModalApprove()" type="button"
+        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700">Cancel</button>
+    </div>
   </div>
 </div>

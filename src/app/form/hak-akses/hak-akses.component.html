@@ -1,98 +1,23 @@
-<button [cModalToggle]="scrollableLongContentModal.id" cButton>Scrollable long content</button>
-
-<c-modal #scrollableLongContentModal id="scrollableLongContentModal" scrollable>
-  <c-modal-header>
-    <h5 cModalTitle>Modal title</h5>
-    <button [cModalToggle]="scrollableLongContentModal.id" cButtonClose></button>
-  </c-modal-header>
-  <c-modal-body>
-    <ng-container *ngTemplateOutlet="longContent"></ng-container>
-  </c-modal-body>
-  <c-modal-footer>
-    <button [cModalToggle]="scrollableLongContentModal.id" cButton color="secondary">
-      Close
-    </button>
-    <button cButton color="primary">Save changes</button>
-  </c-modal-footer>
-</c-modal>
-
-<ng-template #longContent>
-  <p>
-    Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-    in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-  </p>
-  <p>
-    Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-    lacus vel augue laoreet rutrum faucibus dolor auctor.
-  </p>
-  <p>
-    Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
-    scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
-    auctor fringilla.
-  </p>
-  <p>
-    Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-    in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-  </p>
-  <p>
-    Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-    lacus vel augue laoreet rutrum faucibus dolor auctor.
-  </p>
-  <p>
-    Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
-    scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
-    auctor fringilla.
-  </p>
-  <p>
-    Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-    in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-  </p>
-  <p>
-    Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-    lacus vel augue laoreet rutrum faucibus dolor auctor.
-  </p>
-  <p>
-    Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
-    scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
-    auctor fringilla.
-  </p>
-  <p>
-    Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-    in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-  </p>
-  <p>
-    Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-    lacus vel augue laoreet rutrum faucibus dolor auctor.
-  </p>
-  <p>
-    Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
-    scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
-    auctor fringilla.
-  </p>
-  <p>
-    Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-    in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-  </p>
-  <p>
-    Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-    lacus vel augue laoreet rutrum faucibus dolor auctor.
-  </p>
-  <p>
-    Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
-    scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
-    auctor fringilla.
-  </p>
-  <p>
-    Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-    in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-  </p>
-  <p>
-    Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-    lacus vel augue laoreet rutrum faucibus dolor auctor.
-  </p>
-  <p>
-    Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
-    scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
-    auctor fringilla.
-  </p>
-</ng-template>
+<!-- Trigger Button -->
+<button (click)="openModal()" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+	Toggle modal
+  </button>
+  
+  <!-- Modal Background -->
+  <div *ngIf="isModalOpen" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
+	<!-- Modal Content -->
+	<div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+	  <div class="flex justify-between items-center">
+		<h3 class="text-lg font-semibold">Modal Title</h3>
+		<button (click)="closeModal()" class="text-gray-500 hover:text-gray-700">&times;</button>
+	  </div>
+	  <div class="mt-4">
+		<p>Modal content goes here.</p>
+	  </div>
+	  <div class="flex justify-end mt-4">
+		<button (click)="closeModal()" class="bg-blue-500 text-white px-4 py-2 rounded mr-2">Close</button>
+		<button class="bg-green-500 text-white px-4 py-2 rounded">Save changes</button>
+	  </div>
+	</div>
+  </div>
+  
